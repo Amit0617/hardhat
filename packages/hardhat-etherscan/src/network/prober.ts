@@ -2,7 +2,7 @@ import {
   HARDHAT_NETWORK_NAME,
   NomicLabsHardhatPluginError,
 } from "hardhat/plugins";
-import { EthereumProvider, Network } from "hardhat/types";
+import { EthereumProvider } from "hardhat/types";
 
 import { pluginName } from "../constants";
 import { EtherscanURLs, NetworkConfig } from "../types";

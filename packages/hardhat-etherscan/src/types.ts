@@ -1,4 +1,6 @@
-export type NetworkConfig = {
+/* eslint-disable @typescript-eslint/naming-convention */
+
+export interface NetworkConfig {
   mainnet: EtherscanNetworkConfig;
   ropsten: EtherscanNetworkConfig;
   rinkeby: EtherscanNetworkConfig;
@@ -28,7 +30,7 @@ export type NetworkConfig = {
   // moonriver
   moonriver: EtherscanNetworkConfig;
   moonbase_alpha: EtherscanNetworkConfig;
-};
+}
 
 export type EtherscanApiKeys = {
   [Network in keyof NetworkConfig]?: string;

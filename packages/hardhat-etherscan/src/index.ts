@@ -21,7 +21,6 @@ import {
 } from "hardhat/utils/contract-names";
 import path from "path";
 import semver from "semver";
-import { isString } from "util";
 
 import { encodeArguments } from "./ABIEncoder";
 import { etherscanConfigExtender } from "./config";
