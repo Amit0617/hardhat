@@ -47,7 +47,6 @@ import {
   toVerifyRequest,
 } from "./etherscan/EtherscanVerifyContractRequest";
 import {
-  EtherscanURLs,
   getEtherscanEndpoints,
   retrieveContractBytecode,
 } from "./network/prober";
@@ -65,6 +64,7 @@ import {
 } from "./solc/metadata";
 import { getLongVersion } from "./solc/version";
 import "./type-extensions";
+import { EtherscanURLs } from "./types";
 
 interface VerificationArgs {
   address: string;
