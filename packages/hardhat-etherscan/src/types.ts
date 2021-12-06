@@ -1,36 +1,40 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-export interface NetworkConfig {
-  mainnet: EtherscanNetworkConfig;
-  ropsten: EtherscanNetworkConfig;
-  rinkeby: EtherscanNetworkConfig;
-  goerli: EtherscanNetworkConfig;
-  kovan: EtherscanNetworkConfig;
+export enum Networks {
+  mainnet = "mainnet",
+  ropsten = "ropsten",
+  rinkeby = "rinkeby",
+  goerli = "goerli",
+  kovan = "kovan",
   // binance smart chain
-  bsc: EtherscanNetworkConfig;
-  bsc_testnet: EtherscanNetworkConfig;
+  bsc = "bsc",
+  bsc_testnet = "bsc_testnet",
   // huobi eco chain
-  heco: EtherscanNetworkConfig;
-  heco_testnet: EtherscanNetworkConfig;
+  heco = "heco",
+  heco_testnet = "heco_testnet",
   // fantom mainnet
-  opera: EtherscanNetworkConfig;
-  ftm_testnet: EtherscanNetworkConfig;
+  opera = "opera",
+  ftm_testnet = "ftm_testnet",
   // optimistim
-  optimistic_ethereum: EtherscanNetworkConfig;
-  optimistic_kovan: EtherscanNetworkConfig;
+  optimistic_ethereum = "optimistic_ethereum",
+  optimistic_kovan = "optimistic_kovan",
   // polygon
-  polygon: EtherscanNetworkConfig;
-  polygon_mumbai: EtherscanNetworkConfig;
+  polygon = "polygon",
+  polygon_mumbai = "polygon_mumbai",
   // arbitrum
-  arbitrum_one: EtherscanNetworkConfig;
-  arbitrum_testnet: EtherscanNetworkConfig;
+  arbitrum_one = "arbitrum_one",
+  arbitrum_testnet = "arbitrum_testnet",
   // avalanche
-  avalanche: EtherscanNetworkConfig;
-  avalanche_fuji_testnet: EtherscanNetworkConfig;
+  avalanche = "avalanche",
+  avalanche_fuji_testnet = "avalanche_fuji_testnet",
   // moonriver
-  moonriver: EtherscanNetworkConfig;
-  moonbase_alpha: EtherscanNetworkConfig;
+  moonriver = "moonriver",
+  moonbase_alpha = "moonbase_alpha",
 }
+
+export type NetworkConfig = {
+  [Network in Networks]: EtherscanNetworkConfig;
+};
 
 export type EtherscanApiKeys = {
   [Network in keyof NetworkConfig]?: string;
