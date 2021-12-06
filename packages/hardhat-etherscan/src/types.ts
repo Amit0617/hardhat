@@ -53,3 +53,8 @@ export interface EtherscanNetworkConfig {
   chainId: number;
   urls: EtherscanURLs;
 }
+
+export interface EtherscanNetworkEntry {
+  network: Networks;
+  urls: EtherscanURLs;
+}

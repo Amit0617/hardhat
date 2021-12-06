@@ -63,7 +63,7 @@ import {
 } from "./solc/metadata";
 import { getLongVersion } from "./solc/version";
 import "./type-extensions";
-import { EtherscanURLs } from "./types";
+import { EtherscanNetworkEntry, EtherscanURLs } from "./types";
 
 interface VerificationArgs {
   address: string;
@@ -158,8 +158,6 @@ const verifySubtask: ActionType<VerificationSubtaskArgs> = async (
 ) => {
   const { etherscan } = config;
 
-  const etherscanApiKey = resolveEtherscanApiKey(etherscan, network.name);
-
   const { isAddress } = await import("@ethersproject/address");
   if (!isAddress(address)) {
     throw new NomicLabsHardhatPluginError(
@@ -186,8 +184,14 @@ If your constructor has no arguments pass an empty array. E.g:
     TASK_VERIFY_GET_COMPILER_VERSIONS
   );
 
-  const etherscanAPIEndpoints: EtherscanURLs = await run(
-    TASK_VERIFY_GET_ETHERSCAN_ENDPOINT
+  const {
+    network: verificationNetwork,
+    urls: etherscanUrls,
+  }: EtherscanNetworkEntry = await run(TASK_VERIFY_GET_ETHERSCAN_ENDPOINT);
+
+  const etherscanApiKey = resolveEtherscanApiKey(
+    etherscan,
+    verificationNetwork
   );
 
   const deployedBytecodeHex = await retrieveContractBytecode(
@@ -276,7 +280,7 @@ Possible causes are:
   const success: boolean = await run(TASK_VERIFY_VERIFY_MINIMUM_BUILD, {
     minimumBuild,
     contractInformation,
-    etherscanAPIEndpoints,
+    etherscanUrls,
     address,
     etherscanAPIKey: etherscan.apiKey,
     solcFullVersion,
@@ -288,7 +292,7 @@ Possible causes are:
 
   // Fallback verification
   const verificationStatus = await attemptVerification(
-    etherscanAPIEndpoints,
+    etherscanUrls,
     contractInformation,
     address,
     etherscanApiKey,
@@ -300,7 +304,7 @@ Possible causes are:
   if (verificationStatus.isVerificationSuccess()) {
     const contractURL = new URL(
       `/address/${address}#code`,
-      etherscanAPIEndpoints.browserURL
+      etherscanUrls.browserURL
     );
     console.log(
       `Successfully verified full build of contract ${contractInformation.contractName} on Etherscan.

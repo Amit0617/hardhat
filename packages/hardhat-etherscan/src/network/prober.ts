@@ -5,7 +5,7 @@ import {
 import { EthereumProvider } from "hardhat/types";
 
 import { pluginName } from "../constants";
-import { EtherscanURLs, NetworkConfig } from "../types";
+import { EtherscanNetworkEntry, NetworkConfig } from "../types";
 import { networkConfig } from "./NetworkConfig";
 
 const chainIdsToNames = new Map(
@@ -18,7 +18,7 @@ const chainIdsToNames = new Map(
 export async function getEtherscanEndpoints(
   provider: EthereumProvider,
   networkName: string
-): Promise<EtherscanURLs> {
+): Promise<EtherscanNetworkEntry> {
   if (networkName === HARDHAT_NETWORK_NAME) {
     throw new NomicLabsHardhatPluginError(
       pluginName,
@@ -43,7 +43,7 @@ Possible causes are:
     );
   }
 
-  return endpoints.urls;
+  return { network, urls: endpoints.urls };
 }
 
 export async function retrieveContractBytecode(
