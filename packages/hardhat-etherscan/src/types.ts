@@ -1,41 +1,37 @@
-export type NetworkMap = {
-  mainnet: EtherscanURLs;
-  ropsten: EtherscanURLs;
-  rinkeby: EtherscanURLs;
-  goerli: EtherscanURLs;
-  kovan: EtherscanURLs;
+export type NetworkConfig = {
+  mainnet: EtherscanNetworkConfig;
+  ropsten: EtherscanNetworkConfig;
+  rinkeby: EtherscanNetworkConfig;
+  goerli: EtherscanNetworkConfig;
+  kovan: EtherscanNetworkConfig;
   // binance smart chain
-  bsc: EtherscanURLs;
-  bsc_testnet: EtherscanURLs;
+  bsc: EtherscanNetworkConfig;
+  bsc_testnet: EtherscanNetworkConfig;
   // huobi eco chain
-  heco: EtherscanURLs;
-  heco_testnet: EtherscanURLs;
+  heco: EtherscanNetworkConfig;
+  heco_testnet: EtherscanNetworkConfig;
   // fantom mainnet
-  opera: EtherscanURLs;
-  ftm_testnet: EtherscanURLs;
+  opera: EtherscanNetworkConfig;
+  ftm_testnet: EtherscanNetworkConfig;
   // optimistim
-  optimistic_ethereum: EtherscanURLs;
-  optimistic_kovan: EtherscanURLs;
+  optimistic_ethereum: EtherscanNetworkConfig;
+  optimistic_kovan: EtherscanNetworkConfig;
   // polygon
-  polygon: EtherscanURLs;
-  polygon_mumbai: EtherscanURLs;
+  polygon: EtherscanNetworkConfig;
+  polygon_mumbai: EtherscanNetworkConfig;
   // arbitrum
-  arbitrum_one: EtherscanURLs;
-  arbitrum_testnet: EtherscanURLs;
+  arbitrum_one: EtherscanNetworkConfig;
+  arbitrum_testnet: EtherscanNetworkConfig;
   // avalanche
-  avalanche: EtherscanURLs;
-  avalanche_fuji_testnet: EtherscanURLs;
+  avalanche: EtherscanNetworkConfig;
+  avalanche_fuji_testnet: EtherscanNetworkConfig;
   // moonriver
-  moonriver: EtherscanURLs;
-  moonbase_alpha: EtherscanURLs;
-};
-
-export type NetworkIdMap = {
-  [network in keyof NetworkMap]: number;
+  moonriver: EtherscanNetworkConfig;
+  moonbase_alpha: EtherscanNetworkConfig;
 };
 
 export type EtherscanApiKeys = {
-  [Network in keyof NetworkMap]?: string;
+  [Network in keyof NetworkConfig]?: string;
 };
 
 export interface EtherscanConfig {
@@ -45,4 +41,9 @@ export interface EtherscanConfig {
 export interface EtherscanURLs {
   apiURL: string;
   browserURL: string;
+}
+
+export interface EtherscanNetworkConfig {
+  chainId: number;
+  urls: EtherscanURLs;
 }

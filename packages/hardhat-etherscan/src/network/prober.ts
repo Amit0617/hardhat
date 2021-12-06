@@ -5,11 +5,14 @@ import {
 import { EthereumProvider, Network } from "hardhat/types";
 
 import { pluginName } from "../constants";
-import { EtherscanURLs, NetworkMap } from "../types";
-import { networkIds, networkNameToEndpoints } from "./NetworkConfig";
+import { EtherscanURLs, NetworkConfig } from "../types";
+import { networkConfig } from "./NetworkConfig";
 
-const NetworkIdsToNames = new Map(
-  Object.entries(networkIds).map(([network, id]) => [id, network])
+const chainIdsToNames = new Map(
+  Object.entries(networkConfig).map(([network, config]) => [
+    config.chainId,
+    network,
+  ])
 );
 
 export async function getEtherscanEndpoints(
@@ -25,10 +28,9 @@ export async function getEtherscanEndpoints(
 
   const chainID = parseInt(await provider.send("eth_chainId"), 16);
 
-  const network = NetworkIdsToNames.get(chainID) as keyof NetworkMap;
+  const network = chainIdsToNames.get(chainID) as keyof NetworkConfig;
 
-  const endpoints =
-    network !== undefined ? networkNameToEndpoints[network] : undefined;
+  const endpoints = network !== undefined ? networkConfig[network] : undefined;
 
   if (endpoints === undefined) {
     throw new NomicLabsHardhatPluginError(
@@ -41,7 +43,7 @@ Possible causes are:
     );
   }
 
-  return endpoints;
+  return endpoints.urls;
 }
 
 export async function retrieveContractBytecode(
