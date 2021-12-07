@@ -49,24 +49,39 @@ describe("Etherscan API Key resolution", () => {
 
   describe("provide no api key", () => {
     it("should throw if api key root is undefined", () => {
-      assert.throws(() =>
-        resolveEtherscanApiKey({ apiKey: undefined }, "rinkeby")
+      assert.throws(
+        () => resolveEtherscanApiKey({ apiKey: undefined }, "rinkeby"),
+        "Please provide an Etherscan API token via hardhat config.\n  E.g.: { [...], etherscan: { apiKey: 'an API key' }, [...] }\n  or { [...], etherscan: { apiKey: { ropsten: 'an API key' } }, [...] }\n  See https://etherscan.io/apis"
       );
     });
 
     it("should throw if api key root is empty string", () => {
-      assert.throws(() => resolveEtherscanApiKey({ apiKey: "" }, "rinkeby"));
+      assert.throws(
+        () => resolveEtherscanApiKey({ apiKey: "" }, "rinkeby"),
+        "Please provide an Etherscan API token via hardhat config.\n  E.g.: { [...], etherscan: { apiKey: 'an API key' }, [...] }\n  or { [...], etherscan: { apiKey: { ropsten: 'an API key' } }, [...] }\n  See https://etherscan.io/apis"
+      );
     });
 
     it("should throw if network subkey is undefined", () => {
-      assert.throws(() =>
-        resolveEtherscanApiKey({ apiKey: { rinkeby: undefined } }, "rinkeby")
+      assert.throws(
+        () =>
+          resolveEtherscanApiKey({ apiKey: { rinkeby: undefined } }, "rinkeby"),
+        "Please provide an Etherscan API token via hardhat config.\n  E.g.: { [...], etherscan: { apiKey: 'an API key' }, [...] }\n  or { [...], etherscan: { apiKey: { ropsten: 'an API key' } }, [...] }\n  See https://etherscan.io/apis"
       );
     });
 
     it("should throw if network subkey is empty string", () => {
-      assert.throws(() =>
-        resolveEtherscanApiKey({ apiKey: { rinkeby: "" } }, "rinkeby")
+      assert.throws(
+        () => resolveEtherscanApiKey({ apiKey: { rinkeby: "" } }, "rinkeby"),
+        "Please provide an Etherscan API token via hardhat config.\n  E.g.: { [...], etherscan: { apiKey: 'an API key' }, [...] }\n  or { [...], etherscan: { apiKey: { ropsten: 'an API key' } }, [...] }\n  See https://etherscan.io/apis"
+      );
+    });
+
+    it("should throw if network subkey is not a supported network", () => {
+      assert.throws(
+        // @ts-expect-error
+        () => resolveEtherscanApiKey({ apiKey: { boom: "" } }, "boom"),
+        "Unrecognized network: boom"
       );
     });
   });

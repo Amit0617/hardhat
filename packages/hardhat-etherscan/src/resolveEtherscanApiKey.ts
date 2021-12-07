@@ -13,6 +13,7 @@ const checkKey = (key: string | undefined): string => {
       pluginName,
       `Please provide an Etherscan API token via hardhat config.
   E.g.: { [...], etherscan: { apiKey: 'an API key' }, [...] }
+  or { [...], etherscan: { apiKey: { ropsten: 'an API key' } }, [...] }
   See https://etherscan.io/apis`
     );
   }
