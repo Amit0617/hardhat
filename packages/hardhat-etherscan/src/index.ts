@@ -129,7 +129,7 @@ const verify: ActionType<VerificationArgs> = async (
     contract,
     libraries: librariesModule,
   },
-  { run, hardhatArguments: { network } }
+  { run }
 ) => {
   const constructorArguments: any[] = await run(
     TASK_VERIFY_GET_CONSTRUCTOR_ARGUMENTS,
@@ -148,7 +148,6 @@ const verify: ActionType<VerificationArgs> = async (
     constructorArguments,
     contract,
     libraries,
-    network,
   });
 };
 
