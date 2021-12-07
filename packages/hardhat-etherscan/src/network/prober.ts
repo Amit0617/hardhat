@@ -8,13 +8,6 @@ import { pluginName } from "../constants";
 import { EtherscanNetworkEntry, NetworkConfig } from "../types";
 import { networkConfig } from "./NetworkConfig";
 
-const chainIdsToNames = new Map(
-  Object.entries(networkConfig).map(([network, config]) => [
-    config.chainId,
-    network,
-  ])
-);
-
 export async function getEtherscanEndpoints(
   provider: EthereumProvider,
   networkName: string
@@ -25,6 +18,13 @@ export async function getEtherscanEndpoints(
       `The selected network is ${networkName}. Please select a network supported by Etherscan.`
     );
   }
+
+  const chainIdsToNames = new Map(
+    Object.entries(networkConfig).map(([mapName, config]) => [
+      config.chainId,
+      mapName,
+    ])
+  );
 
   const chainID = parseInt(await provider.send("eth_chainId"), 16);
 
