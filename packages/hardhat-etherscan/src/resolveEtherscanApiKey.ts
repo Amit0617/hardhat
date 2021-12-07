@@ -1,6 +1,6 @@
 import { NomicLabsHardhatPluginError } from "hardhat/src/plugins";
 import { pluginName } from "./constants";
-import { networkConfig } from "./network/NetworkConfig";
+import { networkConfig } from "./NetworkConfig";
 import { EtherscanConfig, NetworkConfig } from "./types";
 
 const isNetworkKey = (network: string): network is keyof NetworkConfig => {

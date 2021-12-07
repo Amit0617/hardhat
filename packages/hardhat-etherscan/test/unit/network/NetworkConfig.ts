@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { networkConfig } from "../../../src/network/NetworkConfig";
+import { networkConfig } from "../../../src/NetworkConfig";
 
 describe("Network Config", () => {
   it("should have no duplicate chain ids", () => {

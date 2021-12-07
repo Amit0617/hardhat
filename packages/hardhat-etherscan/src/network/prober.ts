@@ -6,11 +6,11 @@ import { EthereumProvider } from "hardhat/types";
 
 import { pluginName } from "../constants";
 import { EtherscanNetworkEntry, NetworkConfig } from "../types";
-import { networkConfig } from "./NetworkConfig";
 
 export async function getEtherscanEndpoints(
   provider: EthereumProvider,
-  networkName: string
+  networkName: string,
+  networkConfig: NetworkConfig
 ): Promise<EtherscanNetworkEntry> {
   if (networkName === HARDHAT_NETWORK_NAME) {
     throw new NomicLabsHardhatPluginError(

@@ -45,6 +45,7 @@ import {
   toCheckStatusRequest,
   toVerifyRequest,
 } from "./etherscan/EtherscanVerifyContractRequest";
+import { networkConfig } from "./NetworkConfig";
 import {
   getEtherscanEndpoints,
   retrieveContractBytecode,
@@ -590,7 +591,7 @@ See https://etherscan.io/solcversions for more information.`
 );
 
 subtask(TASK_VERIFY_GET_ETHERSCAN_ENDPOINT).setAction(async (_, { network }) =>
-  getEtherscanEndpoints(network.provider, network.name)
+  getEtherscanEndpoints(network.provider, network.name, networkConfig)
 );
 
 subtask(TASK_VERIFY_GET_CONTRACT_INFORMATION)

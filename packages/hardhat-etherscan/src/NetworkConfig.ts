@@ -1,4 +1,4 @@
-import { NetworkConfig } from "../types";
+import { NetworkConfig } from "./types";
 
 // See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md#list-of-chain-ids
 export const networkConfig: NetworkConfig = {
